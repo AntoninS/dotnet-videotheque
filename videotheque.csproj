@@ -181,6 +181,7 @@
     <Compile Include="classes\Personne.cs" />
     <Compile Include="classes\ECivilite.cs" />
     <Compile Include="classes\PersonneMedia.cs" />
+    <Compile Include="db\BooksDbContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
