@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace videotheque.classes
 {
-    class Class1
+    class Episode
     {
     }
 }
