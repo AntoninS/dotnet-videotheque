@@ -8,5 +8,8 @@ namespace videotheque.classes
 {
     class GenreMedia
     {
+        public int IdGenre { get; set; }
+
+        public int IdMedia { get; set; }
     }
 }

@@ -171,6 +171,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\EFonction.cs" />
     <Compile Include="classes\Episode.cs" />
     <Compile Include="classes\ELangue.cs" />
     <Compile Include="classes\ETypeMedia.cs" />
