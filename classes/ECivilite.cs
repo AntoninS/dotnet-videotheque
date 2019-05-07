@@ -8,7 +8,7 @@ namespace videotheque.classes
 {
     public class ECivilite
     {
-        enum Civilite
+        public enum Civilite
         {
             Monsieur,
             Madame,

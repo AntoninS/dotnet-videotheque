@@ -8,7 +8,7 @@ namespace videotheque.classes
 {
     public class ELangue
     {
-        enum Langue
+        public enum Langue
         {
             Anglais,
             Francais,

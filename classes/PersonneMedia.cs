@@ -17,7 +17,7 @@ namespace videotheque.classes
 
         public int IdPersonne { get; set; }
 
-        public EFonction Fonction { get; set; }
+        public EFonction.Fonction Fonction { get; set; }
 
         public string Role { get; set; }
 

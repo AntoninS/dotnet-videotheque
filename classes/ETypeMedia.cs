@@ -8,7 +8,7 @@ namespace videotheque.classes
 {
     public class ETypeMedia
     {
-        enum TypeMedia
+        public enum TypeMedia
         {
             Film,
             Serie

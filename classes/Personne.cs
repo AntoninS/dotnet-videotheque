@@ -13,7 +13,7 @@ namespace videotheque.classes
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public ECivilite Civilite { get; set; }
+        public ECivilite.Civilite Civilite { get; set; }
 
         public string Nom { get; set; }
 

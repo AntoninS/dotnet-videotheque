@@ -189,6 +189,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\20190507093157_initial.cs" />
+    <Compile Include="Migrations\20190507093157_initial.designer.cs">
+      <DependentUpon>20190507093157_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -27,7 +27,7 @@ namespace videotheque.classes
 
         public string Synopsis { get; set; }
 
-        public ETypeMedia TypeMedia { get; set; }
+        public ETypeMedia.TypeMedia TypeMedia { get; set; }
 
         public int AgeMinimum { get; set; }
 
@@ -37,11 +37,11 @@ namespace videotheque.classes
 
         public string Image { get; set; }
 
-        public ELangue LangueVO { get; set; }
+        public ELangue.Langue LangueVO { get; set; }
 
-        public ELangue LangueMedia { get; set; }
+        public ELangue.Langue LangueMedia { get; set; }
 
-        public ELangue SousTitres { get; set; }
+        public ELangue.Langue SousTitres { get; set; }
 
         [InverseProperty(nameof(GenreMedia.Media))]
         public List<GenreMedia> Genres { get; set; }

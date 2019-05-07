@@ -8,7 +8,7 @@ namespace videotheque.classes
 {
     public class EFonction
     {
-        enum Fonction
+        public enum Fonction
         {
             Acteur,
             Directeur,
