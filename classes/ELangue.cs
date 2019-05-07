@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace videotheque.classes
 {
-    class ELangue
+    public class ELangue
     {
         enum Langue
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace videotheque.classes
 {
-    class Personne
+    public class Personne
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -24,5 +24,8 @@ namespace videotheque.classes
         public DateTime DateNaissance { get; set; }
 
         public string Photo { get; set; }
+
+        [InverseProperty(nameof(PersonneMedia.Personne))]
+        public List<PersonneMedia> Medias { get; set; }
     }
 }

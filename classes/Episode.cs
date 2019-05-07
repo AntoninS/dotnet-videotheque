@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace videotheque.classes
 {
-    class Episode
+    public class Episode
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int IdMedia { get; set; }
@@ -23,5 +26,8 @@ namespace videotheque.classes
         public string Description { get; set; }
 
         public DateTime DateDiffusion { get; set; }
+
+        [ForeignKey("IdMedia")]
+        public Media Media { get; set; }
     }
 }

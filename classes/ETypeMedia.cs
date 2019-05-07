@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace videotheque.classes
 {
-    class ETypeMedia
+    public class ETypeMedia
     {
         enum TypeMedia
         {
