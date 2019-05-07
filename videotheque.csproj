@@ -181,12 +181,19 @@
     <Compile Include="classes\Personne.cs" />
     <Compile Include="classes\ECivilite.cs" />
     <Compile Include="classes\PersonneMedia.cs" />
+    <Compile Include="DataAccess\VideothequeDbContext.cs" />
+    <Compile Include="DataAccess\VideothequeDbContextFactory.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\20190507093157_initial.cs" />
+    <Compile Include="Migrations\20190507093157_initial.designer.cs">
+      <DependentUpon>20190507093157_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
