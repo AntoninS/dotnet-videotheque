@@ -18,7 +18,7 @@ namespace videotheque.DataAccess
             if (_context == null)
             {
                 _context = new VideothequeDbContext(
-                    Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "database.db"));
+                   Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\Database\\database.db");
                 await _context.Database.MigrateAsync();
             }
             return _context;
@@ -32,12 +32,12 @@ namespace videotheque.DataAccess
 
         public string DatabasePath { get; }
 
-        public DbSet<classes.Episode> Episodes { get; set; }
-        public DbSet<classes.Genre> Genres { get; set; }
-        public DbSet<classes.GenreMedia> GenreMedias { get; set; }
-        public DbSet<classes.Media> Medias { get; set; }
-        public DbSet<classes.Personne> Personnes { get; set; }
-        public DbSet<classes.PersonneMedia> PersonneMedias { get; set; }
+        public DbSet<Model.Episode> Episodes { get; set; }
+        public DbSet<Model.Genre> Genres { get; set; }
+        public DbSet<Model.GenreMedia> GenreMedias { get; set; }
+        public DbSet<Model.Media> Medias { get; set; }
+        public DbSet<Model.Personne> Personnes { get; set; }
+        public DbSet<Model.PersonneMedia> PersonneMedias { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -50,15 +50,43 @@ namespace videotheque.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<classes.GenreMedia>()
-                                .HasKey(gm => new { gm.IdGenre, gm.IdMedia });
+            modelBuilder.Entity<Model.Media>()
+                                .HasKey(m => new { m.Id });
 
-            modelBuilder.Entity<classes.PersonneMedia>()
-                                .HasKey(pm => new { pm.IdPersonne, pm.IdMedia});
+            modelBuilder.Entity<Model.Genre>()
+                                .HasKey(g => new { g.Id });
 
-            //modelBuilder.Entity<Model.AuthorBook>().HasOne(ab => ab.Book)
-            //                                       .WithMany(b => b.Authors)
-            //                                       .HasForeignKey(ab => ab.BookId);
+            modelBuilder.Entity<Model.GenreMedia>().HasKey(gm => new { gm.IdMedia, gm.IdGenre });
+
+            modelBuilder.Entity<Model.GenreMedia>()
+                                .HasOne<Model.Media>(gm => gm.Media)
+                                .WithMany(m => m.Genres)
+                                .HasForeignKey(gm => gm.IdMedia);
+
+            modelBuilder.Entity<Model.GenreMedia>()
+                                .HasOne<Model.Genre>(gm => gm.Genre)
+                                .WithMany(g => g.GenreMedias)
+                                .HasForeignKey(gm => gm.IdGenre);
+
+
+            modelBuilder.Entity<Model.Personne>()
+                                .HasKey(p => new { p.Id });
+
+            modelBuilder.Entity<Model.PersonneMedia>().HasKey(pm => new { pm.IdPersonne, pm.IdMedia });
+
+            modelBuilder.Entity<Model.PersonneMedia>()
+                                .HasOne<Model.Media>(pm => pm.Media)
+                                .WithMany(m => m.Personnes)
+                                .HasForeignKey(pm => pm.IdMedia);
+
+            modelBuilder.Entity<Model.PersonneMedia>()
+                                .HasOne<Model.Personne>(pm => pm.Personne)
+                                .WithMany(p => p.PersonnesMedia)
+                                .HasForeignKey(pm => pm.IdPersonne);
+
+            modelBuilder.Entity<Model.Episode>()
+                                .HasKey(e => new { e.Id });
+
         }
     }
 }
