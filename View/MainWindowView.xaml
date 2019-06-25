@@ -6,14 +6,78 @@
         xmlns:local="clr-namespace:videotheque"
         mc:Ignorable="d"
         Title="MediaFlix" Height="750" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
-    <Grid Background="Black">
+    <Grid Background="Gray">
         <TextBox HorizontalAlignment="Left" Height="42" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" FontSize="24" AutomationProperties.HelpText="Rechercher un film ou une série" Background="Black" BorderThickness="0,0,0,1" Foreground="#FFB8AEAE" SelectionBrush="{x:Null}" MaxLines="1" AllowDrop="False" Tag="Rechercher" ToolTip="Rechercher" Text="Rechercher un film ou une série....">
             <TextBox.BorderBrush>
                 <SolidColorBrush Color="Red"/>
             </TextBox.BorderBrush>
         </TextBox>
 
-        <DataGrid ItemsSource ="{Binding Medias}" Width="1174" HorizontalAlignment="Left" Margin="10,86,0,10"/>
+        <Label Content="Liste de tous les films :" HorizontalAlignment="Left" Margin="20,244,0,0" VerticalAlignment="Top" Height="42" Width="260" FontSize="24"/>
+        <DataGrid ItemsSource ="{Binding ListFilm}" AutoGenerateColumns="False" Width="498" HorizontalAlignment="Left" Margin="20,302,0,221">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titre" Binding="{Binding Titre}"/>
+                <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
+                <DataGridTextColumn Header="Age Min." Binding="{Binding AgeMinimum}"/>
+                <DataGridTextColumn Header="LangueVO" Binding="{Binding LangueVO}"/>
+                <DataGridTextColumn Header="Langue" Binding="{Binding LangueMedia}"/>
+                <DataGridTextColumn Header="Sous titres" Binding="{Binding SousTitres}"/>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ModifierLeMediaCommand}">Modifier</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding SupprimerLeMedia}">Supprimer</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Liste de toutes les séries :" HorizontalAlignment="Left" Margin="628,244,0,0" VerticalAlignment="Top" Height="42" Width="278" FontSize="24"/>
+        <DataGrid ItemsSource ="{Binding ListSerie}" AutoGenerateColumns="False" Width="496" HorizontalAlignment="Left" Margin="628,302,0,221">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titre" Binding="{Binding Titre}"/>
+                <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
+                <DataGridTextColumn Header="Age Min." Binding="{Binding AgeMinimum}"/>
+                <DataGridTextColumn Header="LangueVO" Binding="{Binding LangueVO}"/>
+                <DataGridTextColumn Header="Langue" Binding="{Binding LangueMedia}"/>
+                <DataGridTextColumn Header="Sous titres" Binding="{Binding SousTitres}"/>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ModifierLeMediaCommand}">Modifier</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding SupprimerLeMedia}">Supprimer</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Bonjour, vous avez actuellement " HorizontalAlignment="Left" Margin="20,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.592,-0.154" FontSize="24"/>
+        <Label Content="{Binding nbMedia}" HorizontalAlignment="Left" Margin="370,64,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="médias dans votre vidéothèque." HorizontalAlignment="Left" Margin="390,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.592,-0.154" FontSize="24"/>
+        <Label Content="Nombre de films :" HorizontalAlignment="Left" Margin="20,106,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Nombre de séries :" HorizontalAlignment="Left" Margin="20,152,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="{Binding nbFilms}" HorizontalAlignment="Left" Margin="224,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24"/>
+        <Label Content="{Binding nbSeries}" HorizontalAlignment="Left" Margin="234,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24"/>
 
     </Grid>
 </Window>
