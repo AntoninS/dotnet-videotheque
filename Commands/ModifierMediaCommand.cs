@@ -11,25 +11,29 @@ namespace videotheque.Commands
 
     public class ModifierMediaCommand : ICommand
     {
-        private Action executeMethod;
-        Func<bool> canExecuteMethod;
+        private Action<object> _executeMethod;
+        private Func<bool> _canExecuteMethod;
 
-        public ModifierMediaCommand(Action executeMethod, Func<bool> canExecuteMethod)
+        public ModifierMediaCommand(Action<object> executeMethod, Func<bool> canExecuteMethod)
         {
-            this.executeMethod = executeMethod;
-            this.canExecuteMethod = canExecuteMethod;
+            this._executeMethod = executeMethod;
+            this._canExecuteMethod = canExecuteMethod;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _canExecuteMethod.Invoke();
         }
 
         public void Execute(object parameter)
         {
-            this.executeMethod();
+            _executeMethod(parameter);
         }
     }
 }

@@ -23,22 +23,17 @@ namespace videotheque.ViewModel
 
         public int nbSeries { get; set; }
 
+        private ICommand _modifierLeMediaCommand;
+
         public MainWindowViewModel()
         {
             this.LoadData();
-
-            ModifierLeMediaCommand = new ModifierMediaCommand(executeMethod, canExecuteMethod);
 
             this.nbMedia = this.ListFilm.Count() + this.ListSerie.Count();
 
             this.nbFilms = this.ListFilm.Count();
 
             this.nbSeries = this.ListSerie.Count();
-        }
-
-        internal bool CanExecute()
-        {
-            return true;
         }
 
         public async void LoadData()
@@ -53,18 +48,24 @@ namespace videotheque.ViewModel
 
         public ICommand ModifierLeMediaCommand
         {
-            get;
-            set;
+            get
+            {
+                return _modifierLeMediaCommand ?? (_modifierLeMediaCommand = new ModifierMediaCommand(param => ExecuteMethod(param), () => CanExecute));
+            }
         }
 
-        private bool canExecuteMethod()
+        public bool CanExecute
         {
-            return true;
+            get
+            {
+                return true;
+            }
         }
 
-        private void executeMethod()
+        private void ExecuteMethod(object param)
         {
             Console.WriteLine("No code behind");
+            Console.WriteLine(param);
         }
 
     }
