@@ -163,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\ModificationMediaViewModel.cs" />
+    <Compile Include="View\ModificationMediaView.xaml.cs">
+      <DependentUpon>ModificationMediaView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -189,6 +193,10 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ModificationMediaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\20190507093157_initial.cs" />
