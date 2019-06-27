@@ -1,45 +1,22 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
+using videotheque.Commands;
 using videotheque.Model;
 
 namespace videotheque.ViewModel
 {
-    class ModificationMediaViewModel
+    class ModificationMediaViewModel : INotifyPropertyChanged
     {
         public Media Media { get; set; }
 
         public int idMedia { get; set; }
 
-        public string TitreMedia { get; set; }
+        private ICommand _enregistrerModificationMediaCommand;
 
-        public DateTime DateSortie { get; set; }
-
-        public TimeSpan Duree { get; set; }
-
-        public bool Vu { get; set; }
-
-        public int Note { get; set; }
-
-        public string Commentaire { get; set; }
-
-        public string Synopsis { get; set; }
-
-        public ETypeMedia.TypeMedia TypeMedia { get; set; }
-
-        public int AgeMinimum { get; set; }
-
-        public bool SupportPhysique { get; set; }
-
-        public bool SupportNumerique { get; set; }
-
-        public string Image { get; set; }
-
-        public ELangue.Langue LangueVO { get; set; }
-
-        public ELangue.Langue LangueMedia { get; set; }
-
-        public ELangue.Langue SousTitres { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ModificationMediaViewModel(){ }
 
@@ -47,22 +24,6 @@ namespace videotheque.ViewModel
         {
             this.idMedia = idMedia;
             this.ChargerMediaAModifier();
-
-            this.TitreMedia = this.Media.Titre;
-            this.Vu = this.Media.Vu;
-            this.DateSortie = this.Media.DateSortie;
-            this.Duree = this.Media.Duree;
-            this.Note = this.Media.Note;
-            this.Commentaire = this.Media.Commentaire;
-            this.Synopsis = this.Media.Synopsis;
-            this.TypeMedia = this.Media.TypeMedia;
-            this.AgeMinimum = this.Media.AgeMinimum;
-            this.SupportPhysique = this.Media.SupportPhysique;
-            this.SupportNumerique = this.Media.SupportNumerique;
-            this.Image = this.Media.Image;
-            this.LangueVO = this.Media.LangueVO;
-            this.LangueMedia = this.Media.LangueMedia;
-            this.SousTitres = this.Media.SousTitres;
         }
 
         public async void ChargerMediaAModifier()
@@ -70,6 +31,38 @@ namespace videotheque.ViewModel
             var context = await DataAccess.VideothequeDbContext.GetCurrent();
 
             this.Media = context.Medias.Where(m => m.Id == idMedia).First();
+        }
+
+        public ICommand EnregistrerModification
+        {
+            get
+            {
+                return _enregistrerModificationMediaCommand ?? (_enregistrerModificationMediaCommand = new EnregistrerModificationMediaCommand(()=> ExecuteMethodEnregistrerModification(), () => CanExecuteEnregistrerModification));
+            }
+        }
+        public bool CanExecuteEnregistrerModification
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        private void ExecuteMethodEnregistrerModification()
+        {
+            this.EnregistrerModificationDb();
+        }
+
+        public async void EnregistrerModificationDb()
+        {
+            var context = await DataAccess.VideothequeDbContext.GetCurrent();
+
+            context.Medias.Attach(this.Media);
+
+            context.Entry(this.Media).State = EntityState.Modified;
+
+            context.SaveChanges();
+
         }
 
     }

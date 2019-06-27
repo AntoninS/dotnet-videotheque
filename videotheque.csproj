@@ -163,6 +163,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\EnregistrerModificationMediaCommand.cs" />
+    <Compile Include="Commands\SupprimerMediaCommand.cs" />
     <Compile Include="ViewModel\ModificationMediaViewModel.cs" />
     <Compile Include="View\ModificationMediaView.xaml.cs">
       <DependentUpon>ModificationMediaView.xaml</DependentUpon>
