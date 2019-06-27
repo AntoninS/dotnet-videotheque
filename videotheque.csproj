@@ -163,12 +163,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AjouterFilmCommand.cs" />
     <Compile Include="Commands\EnregistrerModificationMediaCommand.cs" />
+    <Compile Include="Commands\FilmCommand.cs" />
     <Compile Include="Commands\SupprimerMediaCommand.cs" />
+    <Compile Include="ViewModel\AjouterFilmViewModel.cs" />
+    <Compile Include="ViewModel\FilmViewModel.cs" />
     <Compile Include="ViewModel\ModificationMediaViewModel.cs" />
+    <Compile Include="View\AjouterFilmView.xaml.cs">
+      <DependentUpon>AjouterFilmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FilmView.xaml.cs">
+      <DependentUpon>FilmView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ModificationMediaView.xaml.cs">
       <DependentUpon>ModificationMediaView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AjouterFilmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FilmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

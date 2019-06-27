@@ -10,15 +10,20 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+
     <Grid Background="Gray">
-        <TextBox HorizontalAlignment="Left" Height="42" Margin="20,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" FontSize="24" AutomationProperties.HelpText="Rechercher un film ou une série" Background="Black" BorderThickness="0,0,0,1" Foreground="#FFB8AEAE" SelectionBrush="{x:Null}" MaxLines="1" AllowDrop="False" Tag="Rechercher" ToolTip="Rechercher" Text="Rechercher un film ou une série....">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="274*"/>
+            <RowDefinition Height="447*"/>
+        </Grid.RowDefinitions>
+        <TextBox HorizontalAlignment="Left" Height="42" Margin="23,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" FontSize="24" AutomationProperties.HelpText="Rechercher un film ou une série" Background="Black" BorderThickness="0,0,0,1" Foreground="#FFB8AEAE" SelectionBrush="{x:Null}" MaxLines="1" AllowDrop="False" Tag="Rechercher" ToolTip="Rechercher" Text="Rechercher un film ou une série....">
             <TextBox.BorderBrush>
                 <SolidColorBrush Color="Red"/>
             </TextBox.BorderBrush>
         </TextBox>
 
-        <Label Content="Liste de tous les films :" HorizontalAlignment="Left" Margin="20,244,0,0" VerticalAlignment="Top" Height="42" Width="260" FontSize="24"/>
-        <DataGrid ItemsSource="{Binding ListFilm}" CanUserAddRows="False" AutoGenerateColumns="False" Width="500" HorizontalAlignment="Left" Margin="20,302,0,221">
+        <Label Content="Liste de tous les films :" HorizontalAlignment="Left" Margin="20,71,0,0" VerticalAlignment="Top" Height="42" Width="260" FontSize="24" Grid.Row="1"/>
+        <DataGrid ItemsSource="{Binding ListFilm}" CanUserAddRows="False" AutoGenerateColumns="False" Width="500" HorizontalAlignment="Left" Margin="23,118,0,131" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titre" Binding="{Binding Titre}" Width="150"/>
                 <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
@@ -51,8 +56,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Liste de toutes les séries :" HorizontalAlignment="Left" Margin="628,244,0,0" VerticalAlignment="Top" Height="42" Width="278" FontSize="24"/>
-        <DataGrid ItemsSource ="{Binding ListSerie}" CanUserAddRows="False" AutoGenerateColumns="False" Width="500" HorizontalAlignment="Left" Margin="628,302,0,221">
+        <Label Content="Liste de toutes les séries :" HorizontalAlignment="Left" Margin="628,71,0,0" VerticalAlignment="Top" Height="42" Width="278" FontSize="24" Grid.Row="1"/>
+        <DataGrid ItemsSource ="{Binding ListSerie}" CanUserAddRows="False" AutoGenerateColumns="False" Width="500" HorizontalAlignment="Left" Margin="628,118,0,131" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="150" Header="Titre" Binding="{Binding Titre}"/>
                 <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
@@ -85,13 +90,15 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Bonjour, vous avez actuellement " HorizontalAlignment="Left" Margin="20,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.592,-0.154" FontSize="24"/>
-        <Label Content="{Binding nbMedia}" HorizontalAlignment="Left" Margin="370,64,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Label Content="médias dans votre vidéothèque." HorizontalAlignment="Left" Margin="390,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.592,-0.154" FontSize="24"/>
-        <Label Content="Nombre de films :" HorizontalAlignment="Left" Margin="20,106,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Label Content="Nombre de séries :" HorizontalAlignment="Left" Margin="20,152,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Label Content="{Binding nbFilms}" HorizontalAlignment="Left" Margin="224,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24"/>
-        <Label Content="{Binding nbSeries}" HorizontalAlignment="Left" Margin="234,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24"/>
-
+        <Label Content="Bonjour, vous avez actuellement " HorizontalAlignment="Left" Margin="20,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.592,-0.154" FontSize="24"/>
+        <Label Content="{Binding nbMedia}" HorizontalAlignment="Left" Margin="370,188,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="médias dans votre vidéothèque." HorizontalAlignment="Left" Margin="392,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.592,-0.154" FontSize="24"/>
+        <Label Content="Nombre de films :" HorizontalAlignment="Left" Margin="23,235,0,0" VerticalAlignment="Top" FontSize="24" Grid.RowSpan="2"/>
+        <Label Content="Nombre de séries :" HorizontalAlignment="Left" Margin="20,8,0,0" VerticalAlignment="Top" FontSize="24" Grid.Row="1"/>
+        <Label Content="{Binding nbFilms}" HorizontalAlignment="Left" Margin="234,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24" Grid.RowSpan="2"/>
+        <Label Content="{Binding nbSeries}" HorizontalAlignment="Left" Margin="234,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24" Grid.Row="1"/>
+        <Button Content="Accueil" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="1" Background="#FFE0DFDF" BorderThickness="0"/>
+        <Button Content="Film" Command="{Binding Path=DataContext.OuvrirFenetreFilmCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Left" Margin="426,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
+        <Button Content="Série" HorizontalAlignment="Left" Margin="831,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
     </Grid>
 </Window>

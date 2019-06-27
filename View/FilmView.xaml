@@ -1,0 +1,66 @@
+﻿<Window x:Class="videotheque.View.FilmView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:videotheque.View"
+        xmlns:vm="clr-namespace:videotheque.ViewModel"
+        mc:Ignorable="d"
+        Title="Vos films" Height="480" Width="900">
+
+    <Window.DataContext>
+        <vm:FilmViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <DataGrid SelectedItem="{Binding Path=SelectedMovie, Mode=TwoWay}" ItemsSource="{Binding ListFilm, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Width="499" HorizontalAlignment="Left" Margin="10,0,0,68" Height="371" VerticalAlignment="Bottom">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titre" Binding="{Binding Titre}" Width="150"/>
+                <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
+                <DataGridTextColumn Header="Age Min." Binding="{Binding AgeMinimum}"/>
+                <DataGridTextColumn Header="Langue" Binding="{Binding LangueMedia}" Width="50"/>
+                <DataGridTextColumn Header="Sous titres" Binding="{Binding SousTitres}" Width="60"/>
+
+                <DataGridTemplateColumn Header="Modifier">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button CommandParameter="{Binding Id}" 
+                                    Command="{Binding Path=DataContext.ModifierLeMediaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+                                Modifier
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Supprimer">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button CommandParameter="{Binding Id}"
+                                    Command="{Binding Path=DataContext.SupprimerLeMediaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+                                Supprimer
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <Label Content="Titre :" HorizontalAlignment="Left" Margin="520,11,0,0" VerticalAlignment="Top" Width="39"/>
+        <TextBlock Text="{Binding SelectedMovie.Titre, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="568,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.362,-1.709"/>
+        <CheckBox IsChecked="{Binding SelectedMovie.Vu, Mode=TwoWay}" Content="Vu" HorizontalAlignment="Left" Margin="709,17,0,0" VerticalAlignment="Top"/>
+        <Label Content="Note :" HorizontalAlignment="Left" Margin="521,42,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="568,47,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Label Content="Synopsis :" HorizontalAlignment="Left" Margin="521,82,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="525,113,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="95" Width="209"/>
+        <Label Content="Commentaire :" HorizontalAlignment="Left" Margin="519,223,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="525,254,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="128" Width="218"/>
+        <CheckBox IsChecked="{Binding SelectedMovie.SupportPhysique, Mode=TwoWay}" Content="Support physique" HorizontalAlignment="Left" Margin="709,56,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="{Binding SelectedMovie.SupportNumerique, Mode=TwoWay}" Content="Support numérique" HorizontalAlignment="Left" Margin="709,88,0,0" VerticalAlignment="Top"/>
+
+        <Button Command="{Binding Path=DataContext.AjouterFilmCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                Content="Ajouter un film" HorizontalAlignment="Left" Margin="10,405,0,0" VerticalAlignment="Top" Width="182"/>
+
+    </Grid>
+</Window>

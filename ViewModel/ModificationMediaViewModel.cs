@@ -2,9 +2,11 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
 using videotheque.Model;
+using videotheque.View;
 
 namespace videotheque.ViewModel
 {
@@ -18,11 +20,14 @@ namespace videotheque.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private Window modificationVue;
+
         public ModificationMediaViewModel(){ }
 
-        public ModificationMediaViewModel(int idMedia)
+        public ModificationMediaViewModel(int idMedia, Window window)
         {
             this.idMedia = idMedia;
+            this.modificationVue = window;
             this.ChargerMediaAModifier();
         }
 
@@ -51,6 +56,7 @@ namespace videotheque.ViewModel
         private void ExecuteMethodEnregistrerModification()
         {
             this.EnregistrerModificationDb();
+            this.modificationVue.Close();
         }
 
         public async void EnregistrerModificationDb()

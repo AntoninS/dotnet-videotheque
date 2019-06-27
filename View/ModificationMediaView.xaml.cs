@@ -8,10 +8,12 @@ namespace videotheque.View
     /// </summary>
     public partial class ModificationMediaView : Window
     {
+        public ModificationMediaView(){}
+
         public ModificationMediaView(object param)
         {
             InitializeComponent();
-            DataContext = new ModificationMediaViewModel((int)param);
+            DataContext = new ModificationMediaViewModel((int)param, this);
         }
     }
 }

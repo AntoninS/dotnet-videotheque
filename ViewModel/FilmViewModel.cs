@@ -1,6 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
@@ -9,55 +13,34 @@ using videotheque.View;
 
 namespace videotheque.ViewModel
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    class FilmViewModel : INotifyPropertyChanged
     {
-
         public ObservableCollection<Media> ListFilm { get; set; }
-        public ObservableCollection<Media> ListSerie { get; set; }
-
-        public int nbMedia { get; set; }
-
-        public int nbFilms { get; set; }
-
-        public int nbSeries { get; set; }
 
         private ICommand _modifierLeMediaCommand;
 
         private ICommand _supprimerLeMedia;
 
-        private ICommand _ouvrirFenetreFilm;
+        private ICommand _ajouterFilmCommand;
+
+        private Media SelectedMovie;
+
+        public FilmViewModel()
+        {
+            this.ListFilm = new ObservableCollection<Media>();
+
+            this.LoadData();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MainWindowViewModel()
-        { 
-
-            this.ListFilm = new ObservableCollection<Media>();
-
-            this.ListSerie = new ObservableCollection<Media>();
-
-            this.LoadData();
-
-            this.nbMedia = this.ListFilm.Count() + this.ListSerie.Count();
-
-            this.nbFilms = this.ListFilm.Count();
-
-            this.nbSeries = this.ListSerie.Count();
-        }
-
-        //Chargement de tous les médias et séparation film/série
         public async void LoadData()
         {
             var context = await DataAccess.VideothequeDbContext.GetCurrent();
 
-            foreach(Media f in context.Medias.Where(m => m.TypeMedia.ToString() == "Film").ToList())
+            foreach (Media f in context.Medias.Where(m => m.TypeMedia.ToString() == "Film").ToList())
             {
                 this.ListFilm.Add(f);
-            }
-
-            foreach(Media s in context.Medias.Where(m => m.TypeMedia.ToString() == "Serie").ToList())
-            {
-                this.ListSerie.Add(s);
             }
 
         }
@@ -126,16 +109,16 @@ namespace videotheque.ViewModel
 
         }
 
-        //Ouvrir la fenêtre des films
-        public ICommand OuvrirFenetreFilmCommand
+        //Ajouter un film
+        public ICommand AjouterFilmCommand
         {
             get
             {
-                return _ouvrirFenetreFilm ?? (_ouvrirFenetreFilm = new FilmCommand(() => ExecuteMethodOuvrirFenetreFilm(), () => CanExecuteOuvrirFenetreFilm));
+                return _ajouterFilmCommand ?? (_ajouterFilmCommand = new FilmCommand(() => ExecuteMethodAjouterFilm(), () => CanExecuteAjouterFilm));
             }
         }
 
-        public bool CanExecuteOuvrirFenetreFilm
+        public bool CanExecuteAjouterFilm
         {
             get
             {
@@ -143,10 +126,11 @@ namespace videotheque.ViewModel
             }
         }
 
-        private void ExecuteMethodOuvrirFenetreFilm()
+        private void ExecuteMethodAjouterFilm()
         {
-            FilmView fenetreFilm = new FilmView();
-            fenetreFilm.Show();
+            AjouterFilmView ajouterFilmView = new AjouterFilmView();
+            ajouterFilmView.Show();
         }
     }
+    
 }
