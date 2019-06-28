@@ -5,11 +5,12 @@ using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
 using videotheque.Model;
+using videotheque.Utils;
 using videotheque.View;
 
 namespace videotheque.ViewModel
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    class MainWindowViewModel : UtilsBinding
     {
 
         public ObservableCollection<Media> ListFilm { get; set; }
@@ -26,8 +27,6 @@ namespace videotheque.ViewModel
         private ICommand _supprimerLeMedia;
 
         private ICommand _ouvrirFenetreFilm;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainWindowViewModel()
         { 
@@ -121,6 +120,18 @@ namespace videotheque.ViewModel
             Media mediaASupprimer = context.Medias.Where(m => m.Id == id).First();
 
             context.Medias.Remove(mediaASupprimer);
+
+            if(mediaASupprimer.TypeMedia.ToString() == "Film")
+            {
+                this.ListFilm.Remove(mediaASupprimer);
+            }
+            else
+            {
+                if(mediaASupprimer.TypeMedia.ToString() == "Serie")
+                {
+                    this.ListSerie.Remove(mediaASupprimer);
+                }
+            }
 
             context.SaveChanges();
 

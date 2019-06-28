@@ -6,19 +6,18 @@ using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
 using videotheque.Model;
+using videotheque.Utils;
 using videotheque.View;
 
 namespace videotheque.ViewModel
 {
-    class ModificationMediaViewModel : INotifyPropertyChanged
+    class ModificationMediaViewModel : UtilsBinding
     {
         public Media Media { get; set; }
 
         public int idMedia { get; set; }
 
         private ICommand _enregistrerModificationMediaCommand;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private Window modificationVue;
 

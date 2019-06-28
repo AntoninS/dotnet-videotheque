@@ -9,11 +9,12 @@ using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
 using videotheque.Model;
+using videotheque.Utils;
 using videotheque.View;
 
 namespace videotheque.ViewModel
 {
-    class FilmViewModel : INotifyPropertyChanged
+    class FilmViewModel : UtilsBinding
     {
         public ObservableCollection<Media> ListFilm { get; set; }
 
@@ -23,7 +24,9 @@ namespace videotheque.ViewModel
 
         private ICommand _ajouterFilmCommand;
 
-        private Media SelectedMovie;
+        private Media film;
+
+        public Media Film { get => film; set => SetProperty(ref film, value); }
 
         public FilmViewModel()
         {
@@ -31,8 +34,6 @@ namespace videotheque.ViewModel
 
             this.LoadData();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public async void LoadData()
         {
@@ -104,6 +105,8 @@ namespace videotheque.ViewModel
             Media mediaASupprimer = context.Medias.Where(m => m.Id == id).First();
 
             context.Medias.Remove(mediaASupprimer);
+
+            ListFilm.Remove(Film);
 
             context.SaveChanges();
 
