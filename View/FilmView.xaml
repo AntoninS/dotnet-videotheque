@@ -12,7 +12,7 @@
         <vm:FilmViewModel/>
     </Window.DataContext>
 
-    <Grid Margin="0,0,0,-11">
+    <Grid Margin="0,0,0,-11" Background="Gray">
         <DataGrid SelectedItem="{Binding Film}" IsReadOnly="True" ItemsSource="{Binding ListFilm}" CanUserAddRows="False" AutoGenerateColumns="False" Width="499" HorizontalAlignment="Left" Margin="10,39,0,0" Height="371" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titre" Binding="{Binding Titre}" Width="150"/>

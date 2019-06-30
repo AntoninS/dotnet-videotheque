@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
@@ -54,12 +55,14 @@ namespace videotheque.ViewModel
             var context = await DataAccess.VideothequeDbContext.GetCurrent();
 
             this.Media.TypeMedia = ETypeMedia.TypeMedia.Film;
+
             context.Medias.Add(this.Media);
             this.ListFilm.Add(this.Media);
 
             context.SaveChanges();
 
         }
+
     }
 
 }
