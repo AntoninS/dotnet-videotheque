@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -16,11 +17,17 @@ namespace videotheque.ViewModel
         public ObservableCollection<Media> ListFilm { get; set; }
         public ObservableCollection<Media> ListSerie { get; set; }
 
+        private ObservableCollection<KeyValuePair<string, int>> graphListTypeMedia = new ObservableCollection<KeyValuePair<string, int>>();
+        public ObservableCollection<KeyValuePair<string, int>> GraphListTypeMedia { get => graphListTypeMedia; set => SetProperty(ref graphListTypeMedia, value); }
+
+        private ObservableCollection<KeyValuePair<string, int>> graphListMediaVu = new ObservableCollection<KeyValuePair<string, int>>();
+        public ObservableCollection<KeyValuePair<string, int>> GraphListMediaVu { get => graphListMediaVu; set => SetProperty(ref graphListMediaVu, value); }
+
         public int nbMedia { get; set; }
 
-        public int nbFilms { get; set; }
+        public string filmAVoir { get; set; }
 
-        public int nbSeries { get; set; }
+        public string serieAVoir { get; set; }
 
         private ICommand _modifierLeMediaCommand;
 
@@ -47,9 +54,8 @@ namespace videotheque.ViewModel
 
             this.nbMedia = this.ListFilm.Count() + this.ListSerie.Count();
 
-            this.nbFilms = this.ListFilm.Count();
-
-            this.nbSeries = this.ListSerie.Count();
+            this.GraphListTypeMedia.Add(new KeyValuePair<string, int>("Film", this.ListFilm.Count()));
+            this.GraphListTypeMedia.Add(new KeyValuePair<string, int>("Serie", this.ListSerie.Count()));
 
             this.fenetreModifMedia = new ModificationMediaView();
 
@@ -64,15 +70,39 @@ namespace videotheque.ViewModel
         {
             var context = await DataAccess.VideothequeDbContext.GetCurrent();
 
+            int nbFilmVu = 0;
+            int nbSerieVu = 0;
+
             foreach(Media f in context.Medias.Where(m => m.TypeMedia.ToString() == "Film").ToList())
             {
                 this.ListFilm.Add(f);
+                if (f.Vu == true)
+                {
+                    nbFilmVu++;
+                }
+                else
+                {
+                    if (this.filmAVoir == null)
+                        this.filmAVoir = f.Titre;
+                }
             }
 
             foreach(Media s in context.Medias.Where(m => m.TypeMedia.ToString() == "Serie").ToList())
             {
                 this.ListSerie.Add(s);
+                if (s.Vu == true)
+                {
+                    nbSerieVu++;
+                }
+                else
+                {
+                    if (this.serieAVoir == null)
+                        this.serieAVoir = s.Titre;
+                }
             }
+
+            this.GraphListMediaVu.Add(new KeyValuePair<string, int>("Film vu", nbFilmVu));
+            this.GraphListMediaVu.Add(new KeyValuePair<string, int>("Serie vu", nbSerieVu));
 
         }
 
@@ -197,5 +227,6 @@ namespace videotheque.ViewModel
             this.fenetreSerie = new SerieView(this.ListSerie, this.ListFilm);
             this.fenetreSerie.Show();
         }
+
     }
 }
