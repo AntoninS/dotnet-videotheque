@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\okocaoz\Desktop\dotnet-videotheque\obj\Debug\
+C:\Users\Ogun\Desktop\dotnet-videotheque\obj\Debug\
 videotheque
 none
 false
 DEBUG;TRACE
-C:\Users\okocaoz\Desktop\dotnet-videotheque\App.xaml
-4-447551653
-21228541506
-34-1365080259
-153-2000662211
-View\AjouterFilmView.xaml;View\FilmView.xaml;View\MainWindowView.xaml;View\ModificationMediaView.xaml;
+C:\Users\Ogun\Desktop\dotnet-videotheque\App.xaml
+8-1937433315
+2-354256790
+49-1225520297
+153-892226733
+View\AjouterEpisodeView.xaml;View\AjouterFilmView.xaml;View\AjouterSerieView.xaml;View\FilmView.xaml;View\MainWindowView.xaml;View\ModificationEpisodeView.xaml;View\ModificationMediaView.xaml;View\SerieView.xaml;
 
 False
 

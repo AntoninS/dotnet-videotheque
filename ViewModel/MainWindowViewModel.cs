@@ -28,6 +28,14 @@ namespace videotheque.ViewModel
 
         private ICommand _ouvrirFenetreFilm;
 
+        private ICommand _ouvrirFenetreSerie;
+
+        public ModificationMediaView fenetreModifMedia;
+
+        public FilmView fenetreFilm;
+
+        public SerieView fenetreSerie;
+
         public MainWindowViewModel()
         { 
 
@@ -42,6 +50,13 @@ namespace videotheque.ViewModel
             this.nbFilms = this.ListFilm.Count();
 
             this.nbSeries = this.ListSerie.Count();
+
+            this.fenetreModifMedia = new ModificationMediaView();
+
+            this.fenetreFilm = new FilmView();
+
+            this.fenetreSerie = new SerieView();
+
         }
 
         //Chargement de tous les médias et séparation film/série
@@ -74,14 +89,14 @@ namespace videotheque.ViewModel
         {
             get
             {
-                return true;
+                return !this.fenetreModifMedia.IsVisible;
             }
         }
 
         private void ExecuteMethodModifierMedia(object param)
         {
-            ModificationMediaView fenetreModifMedia = new ModificationMediaView(param);
-            fenetreModifMedia.Show();
+            this.fenetreModifMedia = new ModificationMediaView(param, this.ListFilm, this.ListSerie);
+            this.fenetreModifMedia.Show();
         }
 
         //Supprimer le media choisis par l'utilisateur
@@ -150,14 +165,37 @@ namespace videotheque.ViewModel
         {
             get
             {
-                return true;
+                return !this.fenetreFilm.IsVisible;
             }
         }
 
         private void ExecuteMethodOuvrirFenetreFilm()
         {
-            FilmView fenetreFilm = new FilmView();
-            fenetreFilm.Show();
+            this.fenetreFilm = new FilmView(this.ListFilm, this.ListSerie);
+            this.fenetreFilm.Show();
+        }
+
+        //Ouvrir la fenêtre des séries
+        public ICommand OuvrirFenetreSerieCommand
+        {
+            get
+            {
+                return _ouvrirFenetreSerie ?? (_ouvrirFenetreSerie = new SerieCommand(() => ExecuteMethodOuvrirFenetreSerie(), () => CanExecuteOuvrirFenetreSerie));
+            }
+        }
+
+        public bool CanExecuteOuvrirFenetreSerie
+        {
+            get
+            {
+                return !this.fenetreSerie.IsVisible;
+            }
+        }
+
+        private void ExecuteMethodOuvrirFenetreSerie()
+        {
+            this.fenetreSerie = new SerieView(this.ListSerie, this.ListFilm);
+            this.fenetreSerie.Show();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using videotheque.Commands;
@@ -19,14 +15,18 @@ namespace videotheque.ViewModel
 
         private Window currentWindow;
 
+        public ObservableCollection<Media> ListFilm;
+
         public AjouterFilmViewModel() { }
 
-        public AjouterFilmViewModel(Window window)
+        public AjouterFilmViewModel(Window window, ObservableCollection<Media> listFilm)
         {
             this.currentWindow = window;
+            this.ListFilm = listFilm;
             this.Media = new Media();
         }
 
+        //Ajout du film
         public ICommand AjouterFilmCommand
         {
             get
@@ -55,6 +55,7 @@ namespace videotheque.ViewModel
 
             this.Media.TypeMedia = ETypeMedia.TypeMedia.Film;
             context.Medias.Add(this.Media);
+            this.ListFilm.Add(this.Media);
 
             context.SaveChanges();
 

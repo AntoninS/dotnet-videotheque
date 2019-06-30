@@ -22,7 +22,7 @@
             </TextBox.BorderBrush>
         </TextBox>
 
-        <Label Content="Liste de tous les films :" HorizontalAlignment="Left" Margin="20,71,0,0" VerticalAlignment="Top" Height="42" Width="260" FontSize="24" Grid.Row="1"/>
+        <Label Content="Liste de tous les films :" HorizontalAlignment="Left" Margin="20,71,0,0" VerticalAlignment="Top" Height="42" Width="271" FontSize="24" Grid.Row="1" FontWeight="Bold"/>
         <DataGrid ItemsSource="{Binding ListFilm}" CanUserAddRows="False" AutoGenerateColumns="False" Width="500" HorizontalAlignment="Left" Margin="23,118,0,131" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titre" Binding="{Binding Titre}" Width="150"/>
@@ -56,7 +56,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Liste de toutes les séries :" HorizontalAlignment="Left" Margin="628,71,0,0" VerticalAlignment="Top" Height="42" Width="278" FontSize="24" Grid.Row="1"/>
+        <Label Content="Liste de toutes les séries :" HorizontalAlignment="Left" Margin="628,71,0,0" VerticalAlignment="Top" Height="42" Width="313" FontSize="24" Grid.Row="1" FontWeight="Bold"/>
         <DataGrid ItemsSource ="{Binding ListSerie}" CanUserAddRows="False" AutoGenerateColumns="False" Width="500" HorizontalAlignment="Left" Margin="628,118,0,131" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="150" Header="Titre" Binding="{Binding Titre}"/>
@@ -99,6 +99,6 @@
         <Label Content="{Binding nbSeries}" HorizontalAlignment="Left" Margin="234,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.197,-0.058" FontSize="24" Grid.Row="1"/>
         <Button Content="Accueil" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="1" Background="#FFE0DFDF" BorderThickness="0"/>
         <Button Content="Film" Command="{Binding Path=DataContext.OuvrirFenetreFilmCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Left" Margin="426,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
-        <Button Content="Série" HorizontalAlignment="Left" Margin="831,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
+        <Button Content="Série" Command="{Binding Path=DataContext.OuvrirFenetreSerieCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Left" Margin="831,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
     </Grid>
 </Window>

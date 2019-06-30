@@ -163,24 +163,52 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AjouterEpisodeCommand.cs" />
     <Compile Include="Commands\AjouterFilmCommand.cs" />
+    <Compile Include="Commands\AjouterSerieCommand.cs" />
     <Compile Include="Commands\EnregistrerModificationMediaCommand.cs" />
     <Compile Include="Commands\FilmCommand.cs" />
+    <Compile Include="Commands\ModificationEpisodeCommand.cs" />
+    <Compile Include="Commands\SerieCommand.cs" />
     <Compile Include="Commands\SupprimerMediaCommand.cs" />
     <Compile Include="Utils\UtilsBinding.cs" />
+    <Compile Include="ViewModel\AjouterEpisodeViewModel.cs" />
     <Compile Include="ViewModel\AjouterFilmViewModel.cs" />
+    <Compile Include="ViewModel\AjouterSerieViewModel.cs" />
     <Compile Include="ViewModel\FilmViewModel.cs" />
+    <Compile Include="ViewModel\ModificationEpisodeViewModel.cs" />
     <Compile Include="ViewModel\ModificationMediaViewModel.cs" />
+    <Compile Include="ViewModel\SerieViewModel.cs" />
+    <Compile Include="View\AjouterEpisodeView.xaml.cs">
+      <DependentUpon>AjouterEpisodeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AjouterFilmView.xaml.cs">
       <DependentUpon>AjouterFilmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AjouterSerieView.xaml.cs">
+      <DependentUpon>AjouterSerieView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FilmView.xaml.cs">
       <DependentUpon>FilmView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ModificationEpisodeView.xaml.cs">
+      <DependentUpon>ModificationEpisodeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ModificationMediaView.xaml.cs">
       <DependentUpon>ModificationMediaView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SerieView.xaml.cs">
+      <DependentUpon>SerieView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AjouterEpisodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AjouterFilmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AjouterSerieView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,7 +242,15 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ModificationEpisodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ModificationMediaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SerieView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

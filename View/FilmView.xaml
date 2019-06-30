@@ -6,66 +6,63 @@
         xmlns:local="clr-namespace:videotheque.View"
         xmlns:vm="clr-namespace:videotheque.ViewModel"
         mc:Ignorable="d"
-        Title="Vos films" Height="480" Width="900">
+        Title="Vos films" Height="494.736" Width="900">
 
     <Window.DataContext>
         <vm:FilmViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <DataGrid SelectedItem="{Binding Film}" IsReadOnly="True" x:Name="listFilm" ItemsSource="{Binding ListFilm}" CanUserAddRows="False" AutoGenerateColumns="False" Width="499" HorizontalAlignment="Left" Margin="10,0,0,68" Height="371" VerticalAlignment="Bottom">
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=SelectedMovie}" Value="True"/>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Resources>
+    <Grid Margin="0,0,0,-11">
+        <DataGrid SelectedItem="{Binding Film}" IsReadOnly="True" ItemsSource="{Binding ListFilm}" CanUserAddRows="False" AutoGenerateColumns="False" Width="499" HorizontalAlignment="Left" Margin="10,39,0,0" Height="371" VerticalAlignment="Top">
             <DataGrid.Columns>
-                    <DataGridTextColumn Header="Titre" Binding="{Binding Titre}" Width="150"/>
-                    <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
-                    <DataGridTextColumn Header="Age Min." Binding="{Binding AgeMinimum}"/>
-                    <DataGridTextColumn Header="Langue" Binding="{Binding LangueMedia}" Width="50"/>
-                    <DataGridTextColumn Header="Sous titres" Binding="{Binding SousTitres}" Width="60"/>
+                <DataGridTextColumn Header="Titre" Binding="{Binding Titre}" Width="150"/>
+                <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
+                <DataGridTextColumn Header="Age Min." Binding="{Binding AgeMinimum}"/>
+                <DataGridTextColumn Header="Langue" Binding="{Binding LangueMedia}" Width="50"/>
+                <DataGridTextColumn Header="Sous titres" Binding="{Binding SousTitres}" Width="60"/>
 
-                    <DataGridTemplateColumn Header="Modifier">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button CommandParameter="{Binding Id}" 
+                <DataGridTemplateColumn Header="Modifier">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button CommandParameter="{Binding Id}" 
                                     Command="{Binding Path=DataContext.ModifierLeMediaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
-                                    Modifier
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                Modifier
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Supprimer">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button CommandParameter="{Binding Id}"
+                <DataGridTemplateColumn Header="Supprimer">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button CommandParameter="{Binding Id}"
                                     Command="{Binding Path=DataContext.SupprimerLeMediaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
-                                    Supprimer
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
+                                Supprimer
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Titre :" HorizontalAlignment="Left" Margin="520,11,0,0" VerticalAlignment="Top" Width="39"/>
-        <TextBlock Text="{Binding Film.Titre}" MaxWidth="135" HorizontalAlignment="Left" Margin="568,16,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" RenderTransformOrigin="0.362,-1.709"/>
-        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedItem.Vu, ElementName=listFilm}" Content="Vu" HorizontalAlignment="Left" Margin="709,17,0,0" VerticalAlignment="Top"/>
-        <Label Content="Note :" HorizontalAlignment="Left" Margin="521,42,0,0" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding SelectedItem.Note, ElementName=listFilm}" HorizontalAlignment="Left" Margin="568,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Label Content="Synopsis :" HorizontalAlignment="Left" Margin="521,82,0,0" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding SelectedItem.Synopsis, ElementName=listFilm}" HorizontalAlignment="Left" Margin="525,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="95" Width="209"/>
-        <Label Content="Commentaire :" HorizontalAlignment="Left" Margin="519,223,0,0" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding SelectedItem.Commentaire, ElementName=listFilm}" HorizontalAlignment="Left" Margin="525,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="128" Width="218"/>
-        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedItem.SupportPhysique, ElementName=listFilm}" Content="Support physique" HorizontalAlignment="Left" Margin="709,56,0,0" VerticalAlignment="Top"/>
-        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedItem.SupportNumerique, ElementName=listFilm}" Content="Support numérique" HorizontalAlignment="Left" Margin="709,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Titre :" HorizontalAlignment="Left" Margin="518,38,0,0" VerticalAlignment="Top" Width="39"/>
+        <TextBlock Text="{Binding Film.Titre}" MaxWidth="135" HorizontalAlignment="Left" Margin="566,43,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" RenderTransformOrigin="0.362,-1.709"/>
+        <CheckBox IsEnabled="False" IsChecked="{Binding Film.Vu}" Content="Vu" HorizontalAlignment="Left" Margin="707,44,0,0" VerticalAlignment="Top"/>
+        <Label Content="Note :" HorizontalAlignment="Left" Margin="519,69,0,0" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding Film.Note}" HorizontalAlignment="Left" Margin="566,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label Content="Synopsis :" HorizontalAlignment="Left" Margin="519,109,0,0" VerticalAlignment="Top"/>
+        <Label Content="Commentaire :" HorizontalAlignment="Left" Margin="517,250,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsEnabled="False" IsChecked="{Binding Film.SupportPhysique}" Content="Support physique" HorizontalAlignment="Left" Margin="707,83,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsEnabled="False" IsChecked="{Binding Film.SupportNumerique}" Content="Support numérique" HorizontalAlignment="Left" Margin="707,115,0,0" VerticalAlignment="Top"/>
 
         <Button Command="{Binding Path=DataContext.AjouterFilmCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                Content="Ajouter un film" HorizontalAlignment="Left" Margin="10,405,0,0" VerticalAlignment="Top" Width="182"/>
+                Content="Ajouter un film" HorizontalAlignment="Left" Margin="10,426,0,0" VerticalAlignment="Top" Width="182"/>
+        <Label Content="Date de sortie :" HorizontalAlignment="Left" Margin="703,150,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="709,176,0,0" TextWrapping="Wrap" Text="{Binding Film.DateSortie, StringFormat=dd/MM/yyyy}" VerticalAlignment="Top"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="105" Margin="523,140,0,0" TextWrapping="Wrap" Text="{Binding Film.Synopsis}" VerticalAlignment="Top" Width="163"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="127" Margin="523,281,0,0" TextWrapping="Wrap" Text="{Binding Film.Commentaire}" VerticalAlignment="Top" Width="307"/>
+        <Label Content="Détails du film :" HorizontalAlignment="Left" Margin="517,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Liste de vos films : " HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 
     </Grid>
 </Window>
