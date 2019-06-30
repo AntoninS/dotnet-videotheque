@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -15,6 +16,9 @@ namespace videotheque.ViewModel
 
         public ObservableCollection<Media> ListFilm { get; set; }
         public ObservableCollection<Media> ListSerie { get; set; }
+
+        private ObservableCollection<TypeMedia> _typeMediaCollection;
+        public ObservableCollection<TypeMedia> TypeMediaCollection { get { return _typeMediaCollection; } set { _typeMediaCollection = value; OnPropertyChanged("TypeMediaCollection"); } }
 
         public int nbMedia { get; set; }
 
@@ -50,6 +54,11 @@ namespace videotheque.ViewModel
             this.nbFilms = this.ListFilm.Count();
 
             this.nbSeries = this.ListSerie.Count();
+
+            this.TypeMediaCollection = new ObservableCollection<TypeMedia>();
+
+            this.TypeMediaCollection.Add(new TypeMedia { Nom = "Film", Nb = nbFilms });
+            this.TypeMediaCollection.Add(new TypeMedia { Nom = "Serie", Nb = nbSeries });
 
             this.fenetreModifMedia = new ModificationMediaView();
 
@@ -197,5 +206,12 @@ namespace videotheque.ViewModel
             this.fenetreSerie = new SerieView(this.ListSerie, this.ListFilm);
             this.fenetreSerie.Show();
         }
+
+        public class TypeMedia
+        {
+            public string Nom;
+            public int Nb;
+        }
+
     }
 }

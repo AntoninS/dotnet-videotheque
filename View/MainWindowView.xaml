@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:videotheque.View"
         xmlns:vm="clr-namespace:videotheque.ViewModel"
-        mc:Ignorable="d"
+         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    mc:Ignorable="d"
         Title="MediaFlix" Height="750" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -16,7 +17,7 @@
             <RowDefinition Height="274*"/>
             <RowDefinition Height="447*"/>
         </Grid.RowDefinitions>
-        <TextBox HorizontalAlignment="Left" Height="42" Margin="23,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" FontSize="24" AutomationProperties.HelpText="Rechercher un film ou une série" Background="Black" BorderThickness="0,0,0,1" Foreground="#FFB8AEAE" SelectionBrush="{x:Null}" MaxLines="1" AllowDrop="False" Tag="Rechercher" ToolTip="Rechercher" Text="Rechercher un film ou une série....">
+        <TextBox HorizontalAlignment="Left" Height="42" Margin="23,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" FontSize="24" AutomationProperties.HelpText="Rechercher un film ou une série" Background="Black" BorderThickness="0,0,0,1" Foreground="#FFB8AEAE" MaxLines="1" AllowDrop="False" ToolTip="Rechercher" Text="Rechercher un film ou une série....">
             <TextBox.BorderBrush>
                 <SolidColorBrush Color="Red"/>
             </TextBox.BorderBrush>
@@ -100,5 +101,14 @@
         <Button Content="Accueil" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="1" Background="#FFE0DFDF" BorderThickness="0"/>
         <Button Content="Film" Command="{Binding Path=DataContext.OuvrirFenetreFilmCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Left" Margin="426,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
         <Button Content="Série" Command="{Binding Path=DataContext.OuvrirFenetreSerieCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Left" Margin="831,10,0,0" VerticalAlignment="Top" Width="330" Height="62" FontSize="36" BorderThickness="0" VerticalContentAlignment="Top"/>
+
+        <chartingToolkit:Chart Margin="831,110,141,381" Title="Chart Title" Grid.RowSpan="2">
+            <chartingToolkit:Chart.DataContext>
+                <vm:MainWindowViewModel/>
+            </chartingToolkit:Chart.DataContext>
+            <chartingToolkit:PieSeries ItemsSource="{Binding TypeMediaCollection}" DependentValuePath="Nb" IndependentValuePath="Nom">
+            </chartingToolkit:PieSeries>
+        </chartingToolkit:Chart>
+
     </Grid>
 </Window>
