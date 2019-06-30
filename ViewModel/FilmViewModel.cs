@@ -18,6 +18,8 @@ namespace videotheque.ViewModel
     {
         public ObservableCollection<Media> ListFilm { get; set; }
 
+        public ObservableCollection<Media> ListSerie { get; set; }
+
         private ICommand _modifierLeMediaCommand;
 
         private ICommand _supprimerLeMedia;
@@ -28,22 +30,18 @@ namespace videotheque.ViewModel
 
         public Media Film { get => film; set => SetProperty(ref film, value); }
 
-        public FilmViewModel()
+        public ModificationMediaView fenetreModifMedia;
+
+        public AjouterFilmView ajouterFilmView;
+
+        public FilmViewModel() { }
+
+        public FilmViewModel(ObservableCollection<Media> listFilm, ObservableCollection<Media> listSerie)
         {
-            this.ListFilm = new ObservableCollection<Media>();
-
-            this.LoadData();
-        }
-
-        public async void LoadData()
-        {
-            var context = await DataAccess.VideothequeDbContext.GetCurrent();
-
-            foreach (Media f in context.Medias.Where(m => m.TypeMedia.ToString() == "Film").ToList())
-            {
-                this.ListFilm.Add(f);
-            }
-
+            this.ListFilm = listFilm;
+            this.ListSerie = listSerie;
+            this.fenetreModifMedia = new ModificationMediaView();
+            this.ajouterFilmView = new AjouterFilmView();
         }
 
         //Modifier le media choisit par l'utilisateur
@@ -59,14 +57,14 @@ namespace videotheque.ViewModel
         {
             get
             {
-                return true;
+                return !this.fenetreModifMedia.IsVisible;
             }
         }
 
         private void ExecuteMethodModifierMedia(object param)
         {
-            ModificationMediaView fenetreModifMedia = new ModificationMediaView(param);
-            fenetreModifMedia.Show();
+            this.fenetreModifMedia = new ModificationMediaView(param, this.ListFilm, this.ListSerie);
+            this.fenetreModifMedia.Show();
         }
 
         //Supprimer le media choisis par l'utilisateur
@@ -125,14 +123,14 @@ namespace videotheque.ViewModel
         {
             get
             {
-                return true;
+                return !this.ajouterFilmView.IsVisible;
             }
         }
 
         private void ExecuteMethodAjouterFilm()
         {
-            AjouterFilmView ajouterFilmView = new AjouterFilmView();
-            ajouterFilmView.Show();
+            this.ajouterFilmView = new AjouterFilmView(this.ListFilm);
+            this.ajouterFilmView.Show();
         }
     }
     

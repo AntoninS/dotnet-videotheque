@@ -54,7 +54,6 @@
         <Label Content="Sous Titres : " HorizontalAlignment="Left" Margin="395,249,0,0" VerticalAlignment="Top"/>
         <ComboBox ItemsSource="{Binding Source={StaticResource enmLangue}}" SelectedItem="{Binding Media.SousTitres}" HorizontalAlignment="Left" Margin="498,253,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Command="{Binding Path=DataContext.EnregistrerModification, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" 
-                CommandParameter="{Binding ElementName=FermerFenetreModification}" 
                 Content="Enregistrer les modifications" HorizontalAlignment="Left" Margin="532,379,0,0" VerticalAlignment="Top" Width="170">
         </Button>
 

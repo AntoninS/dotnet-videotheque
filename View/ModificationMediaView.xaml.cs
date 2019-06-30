@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using videotheque.Model;
 using videotheque.ViewModel;
 
 namespace videotheque.View
@@ -10,10 +12,10 @@ namespace videotheque.View
     {
         public ModificationMediaView(){}
 
-        public ModificationMediaView(object param)
+        public ModificationMediaView(object param, ObservableCollection<Media> listFilm, ObservableCollection<Media> listSerie)
         {
             InitializeComponent();
-            DataContext = new ModificationMediaViewModel((int)param, this);
+            DataContext = new ModificationMediaViewModel((int)param, this, listFilm, listSerie);
         }
     }
 }
